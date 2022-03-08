@@ -1,0 +1,28 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="row justify-content-center mt-3" *ngIf="!loading">
+    <div class="col-2 align-self-center">
+        <img class="icon" src="../../../assets/img/profileicon/{{invocador.profileIconId}}.png" alt="">
+    </div>
+    <div class="col-4 align-self-center">
+        <h2>{{invocador.name}}</h2>
+    </div>
+</div>
+
+
+<div class="row justify-content-center mt-3" *ngIf="!loading">
+    <div class="col align-self-center mt-3" *ngFor="let maestria of maestriaCampeones; let i = index">
+        <div class="card" style="width: 18rem;">
+            <div><img src="../../../assets/img/champion/{{campeones[i].id}}.png" class="card-img-top" alt="{{campeones[i].name}}">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{campeones[i].name}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Nivel de maestria: {{maestria.championLevel}}</li>
+                <li class="list-group-item">Puntos de Maestria: {{maestria.championPoints | number}}</li>
+                <li class="list-group-item">Ultima vez jugado: {{maestria.lastPlayTime| date: 'd/M/yy'}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

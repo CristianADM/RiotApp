@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-2 align-self-center">
+        <img src="../../../assets/img/logos/challenger.png" height="200px" width="200px" alt="retador-logo">
+    </div>
+    <div class="col-4 align-self-center">
+        <h1>Los mejores jugadores</h1>
+    </div>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>
+
+<table class="table" *ngIf="!loading">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Invocador</th>
+            <th scope="col">Puntos de Liga</th>
+            <th scope="col">Partidas G/P</th>
+            <th scope="col">Tasa de victorias</th>
+            <th scope="col">División</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let invocador of jugadores; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td><a class="link" routerLink="/invocador/{{invocador.summonerId}}">{{invocador.summonerName}}</a></td>
+            <td>{{invocador.leaguePoints}}</td>
+            <td>{{invocador.wins}}/{{invocador.losses}}</td>
+            <td>{{(invocador.wins/(invocador.losses+invocador.wins)) | percent:'0.2-2'}}</td>
+            <td>{{invocador.tier}}</td>
+        </tr>
+    </tbody>
+</table>

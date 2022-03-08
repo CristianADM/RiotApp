@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../../../assets/img/lol.jpg" alt="" width="50" height="50" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" routerLinkActive="active">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLink="/inicio">Campeones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLink="/ranking">Ranking</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <input #txtBuscar (keyup.enter)="buscarInvocador(txtBuscar.value)" class="form-control me-2" type="search" placeholder="Búscar invocador" aria-label="Search">
+                <button (click)="buscarInvocador(txtBuscar.value)" class="btn btn-outline-info" type="button">Búscar</button>
+            </div>
+        </div>
+    </div>
+</nav>
