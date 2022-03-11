@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let invocador of jugadores; let i = index">
+        <tr *ngFor="let invocador of jugadores | paginate: { itemsPerPage: 50, currentPage: page, totalItems: jugadores.length }; let i = index ">
             <th scope="row">{{i+1}}</th>
             <td><a class="link" routerLink="/invocador/{{invocador.summonerId}}">{{invocador.summonerName}}</a></td>
             <td>{{invocador.leaguePoints}}</td>
@@ -31,3 +31,7 @@
         </tr>
     </tbody>
 </table>
+
+<div class="pagination justify-content-center mt-2">
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+</div>

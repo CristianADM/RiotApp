@@ -12,6 +12,7 @@ export class InicioComponent implements OnInit {
 
   campeones: Datum[];
   loading: boolean;
+  page: number; 
 
   constructor(private _ritoService: RiotServiceService, 
               private router: Router) {

@@ -1,9 +1,9 @@
 <app-loading *ngIf="loading"></app-loading>
 
-<div class="row row-cols-1 row-cols-md-6 g-4 mt-5" *ngIf="!loading">
-    <div class="col" *ngFor="let campeon of campeones">
+<div class="row row-cols-1 row-cols-md-4 g-4 mt-5" *ngIf="!loading">
+    <div class="col" *ngFor="let campeon of campeones | paginate: { itemsPerPage: 12, currentPage: page, totalItems: campeones.length }">
         <div class="card">
-            <img src="../../../assets/img/champion/{{campeon.id}}.png" class="card-img-top" alt="{{campeon.name}}">
+            <img src="../../../assets/img/tiles/{{campeon.id}}_0.jpg" class="card-img-top" alt="{{campeon.name}}">
             <div class="card-body">
                 <h5 class="card-title">{{campeon.name}}</h5>
                 <p class="card-text">{{campeon.blurb}}</p>
@@ -15,4 +15,7 @@
             </div>
         </div>
     </div>
+</div>
+<div class="pagination justify-content-center mt-2">
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 </div>

@@ -11,6 +11,7 @@ export class RankingComponent implements OnInit {
 
   jugadores: RankingResponse[] = [];
   loading: boolean;
+  page:number;
 
   constructor(private _riotService: RiotServiceService) {
 
