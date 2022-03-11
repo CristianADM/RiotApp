@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PartidaResponse } from 'src/app/interfaces/Partida';
 import { Datum } from '../../interfaces/campeones';
 import { MaestryResponse } from '../../interfaces/maestrias';
 import { SummonerResponse } from '../../interfaces/sumoner';
@@ -15,7 +16,7 @@ export class InvocadorComponent implements OnInit {
   invocador: SummonerResponse;
   maestriaCampeones: MaestryResponse[] = [];
   campeones: Datum[];
-  partidas: any[] = [];
+  partidas: PartidaResponse[] = [];
 
   idInvocador :string ="";
   loading: boolean;
@@ -49,7 +50,10 @@ export class InvocadorComponent implements OnInit {
       console.log(this.campeones);
       console.log(this.maestriaCampeones);
 
-      this._riotService.getPartidasbyPUid(this.invocador.puuid);
+      this._riotService.getPartidasbyPUid(this.invocador.puuid).then((resp)=>{
+        this.partidas = resp;
+        console.log(this.partidas);
+      });
 
       this.loading = false;
     });

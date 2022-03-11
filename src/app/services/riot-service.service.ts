@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 
 import { CampeonesResponse } from '../interfaces/campeones';
 import { CampeonRespuesta } from '../interfaces/campeon';
 import { RankingResponse } from '../interfaces/ranking';
 import { SummonerResponse } from '../interfaces/sumoner';
 import { MaestryResponse } from '../interfaces/maestrias';
+import { PartidaResponse } from '../interfaces/Partida';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ import { MaestryResponse } from '../interfaces/maestrias';
 export class RiotServiceService {
 
   private baseUrl: string = "api.riotgames.com/lol"
-  private api_key:string = "RGAPI-5cb5881c-65f9-41c6-9fa6-b4a3b506d7c8";
+  private api_key:string = "RGAPI-27f5ca69-318c-4f33-8d5a-46c84c4b1e36";
 
-  private partidas;
+  private partidas: any[];
 
   constructor(private http: HttpClient) { }
 
@@ -52,8 +53,9 @@ export class RiotServiceService {
     return this.http.get<MaestryResponse>(`https://la1.${this.baseUrl}/champion-mastery/v4/champion-masteries/by-summoner/${idInvocador}?api_key=${this.api_key}`);
   }
 
-  public getPartidasbyPUid(puid: string){
-
+  public async getPartidasbyPUid(puid: string){
+    let partidasid: any[] = [];
+    let partidas: PartidaResponse[] = [];
     /* PREGUNTAR: 
       ¿por que cuando creo una variable y se la asigno me muestra undefiend?
 
@@ -63,12 +65,17 @@ export class RiotServiceService {
     });
       */
 
-    this.http.get(`https://americas.${this.baseUrl}/match/v5/matches/by-puuid/${puid}/ids?start=0&count=10&api_key=${this.api_key}`).subscribe((resp) => { 
-      this.partidas = resp; 
-    });
+    partidasid = await firstValueFrom(this.http.get<any[]>(`https://americas.${this.baseUrl}/match/v5/matches/by-puuid/${puid}/ids?start=0&count=10&api_key=${this.api_key}`));
 
+    console.log(partidasid);
 
-    console.log(this.partidas);
+    for(let i = 0; i < partidasid.length; i++){
+      //https://americas.api.riotgames.com/lol/match/v5/matches/LA1_1212965413?api_key=RGAPI-628e9ac6-03ca-4f78-8b9e-eb4d20705aaa
+      var partida = await firstValueFrom(this.http.get<PartidaResponse>(`https://americas.${this.baseUrl}/match/v5/matches/${partidasid[i]}?api_key=${this.api_key}`));
+      partidas.push(partida);
+    }
+    
+    return partidas;
   }
 
 }

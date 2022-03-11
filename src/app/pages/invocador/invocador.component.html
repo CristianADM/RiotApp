@@ -26,3 +26,41 @@
         </div>
     </div>
 </div>
+
+<div class="mt-5">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let partida of partidas">
+            <div class="row">
+                <div class="col">
+                    <p>Fecha: {{partida.info.gameCreation | date}}</p>
+                    <p>Duracion: {{partida.info.gameDuration*1000 | date: 'mm:ss'}}</p>
+                    <p>Modo de juego: {{partida.info.gameMode}}</p>
+                    <span class="badge rounded-pill bg-success" *ngIf="partida.info.teams[0].win">Victoria</span>
+                    <span class="badge rounded-pill bg-danger" *ngIf="!partida.info.teams[0].win">Derrota</span>
+                </div>
+                <div class="col">
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let participante of partida.info.participants; let i = index">
+                                <td *ngIf="i < 5">{{participante.championName}}</td>
+                                <td *ngIf="i < 5"> Lvl: {{participante.champLevel}}</td>
+                                <td *ngIf="i < 5">{{participante.deaths}}/{{participante.kills}}/{{participante.assists}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let participante of partida.info.participants; let i = index">
+                                <td *ngIf="i >= 5">{{participante.championName}}</td>
+                                <td *ngIf="i >= 5">Lvl: {{participante.champLevel}}</td>
+                                <td *ngIf="i >= 5">{{participante.deaths}}/{{participante.kills}}/{{participante.assists}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
