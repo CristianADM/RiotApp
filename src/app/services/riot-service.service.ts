@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
+import { catchError, map} from 'rxjs/operators';
 
 import { CampeonesResponse } from '../interfaces/campeones';
 import { CampeonRespuesta } from '../interfaces/campeon';
@@ -15,7 +16,7 @@ import { PartidaResponse } from '../interfaces/Partida';
 export class RiotServiceService {
 
   private baseUrl: string = "api.riotgames.com/lol"
-  private api_key:string = "RGAPI-27f5ca69-318c-4f33-8d5a-46c84c4b1e36";
+  private api_key:string = "RGAPI-117d163c-e704-4c30-a15a-42566c394656";
 
   private partidas: any[];
 
@@ -42,7 +43,9 @@ export class RiotServiceService {
   }
 
   public getInvocadorById(idInvocador: string){
-    return this.http.get<SummonerResponse>(`https://la1.${this.baseUrl}/summoner/v4/summoners/${idInvocador}?api_key=${this.api_key}`);
+    return this.http.get<SummonerResponse>(`https://la1.${this.baseUrl}/summoner/v4/summoners/${idInvocador}?api_key=${this.api_key}`).pipe(
+      catchError((err) => of(null))
+    );
   }
 
   public getInvocadorByNombre(nombreInvocador: string){

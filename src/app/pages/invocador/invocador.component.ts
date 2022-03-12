@@ -17,6 +17,7 @@ export class InvocadorComponent implements OnInit {
   maestriaCampeones: MaestryResponse[] = [];
   campeones: Datum[];
   partidas: PartidaResponse[] = [];
+  isInvocador: boolean;
 
   idInvocador :string ="";
   loading: boolean;
@@ -32,8 +33,14 @@ export class InvocadorComponent implements OnInit {
 
     this._riotService.getInvocadorById(this.idInvocador).subscribe((resp) => {
       console.log(resp);
+      if(!resp){
+        this.isInvocador = false;
+      }
       this.invocador = resp;
+      this.isInvocador = true;
     });
+
+    console.log("Cuando no encuentra al invocador " + this.invocador);
 
     this._riotService.getCampeones().subscribe((resp) => {
       this.campeones = resp;

@@ -12,26 +12,22 @@ export class InicioComponent implements OnInit {
 
   campeones: Datum[];
   loading: boolean;
-  page: number; 
+  page: number;
 
   constructor(private _ritoService: RiotServiceService, 
               private router: Router) {
 
     this.loading = true;
 
-    this.consultarCampeones();
+    this._ritoService.getCampeones().subscribe((data)=>{
+      console.log(data);
+      this.campeones = data;
+    });
 
     this.loading = false;
   }
 
   ngOnInit(): void {
-  }
-
-  consultarCampeones(){
-    this._ritoService.getCampeones().subscribe((data)=>{
-      console.log(data);
-      this.campeones = data;
-    });
   }
 
   verCampeon(idCampeon: string){

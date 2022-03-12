@@ -32,6 +32,6 @@
     </tbody>
 </table>
 
-<div class="pagination justify-content-center mt-2">
+<div class="pagination justify-content-center mt-2" *ngIf="!loading">
     <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 </div>
