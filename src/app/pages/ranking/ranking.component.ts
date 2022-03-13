@@ -14,7 +14,9 @@ export class RankingComponent implements OnInit {
   page:number;
 
   constructor(private _riotService: RiotServiceService) {
+  }
 
+  ngOnInit(): void {
     this.loading = true;
 
     this._riotService.getRanking().subscribe((resp: RankingResponse[]) => {
@@ -22,9 +24,6 @@ export class RankingComponent implements OnInit {
       this.jugadores = resp;
       this.loading = false;
     });
-  }
-
-  ngOnInit(): void {
   }
 
 }

@@ -24,7 +24,10 @@ export class NavbarComponent implements OnInit {
     }
 
     this._riotService.getInvocadorByNombre(nombreInvocador).subscribe((resp) => {
-      this.router.navigate(["/invocador", resp.id]);
+      if(!resp){
+        this.router.navigate(["/invocador", "noexiste"]);
+      } 
+        this.router.navigate(["/invocador", resp.id]);
     });
 
   }

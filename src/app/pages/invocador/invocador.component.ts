@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PartidaResponse } from 'src/app/interfaces/Partida';
 import { Datum } from '../../interfaces/campeones';
 import { MaestryResponse } from '../../interfaces/maestrias';
@@ -17,30 +17,36 @@ export class InvocadorComponent implements OnInit {
   maestriaCampeones: MaestryResponse[] = [];
   campeones: Datum[];
   partidas: PartidaResponse[] = [];
-  isInvocador: boolean;
+  existeInvovador: boolean;
 
   idInvocador :string ="";
   loading: boolean;
 
   constructor(private _riotService: RiotServiceService,
-              private activateRouter: ActivatedRoute) {
+              private activateRouter: ActivatedRoute,
+              private router: Router) {
+  }
 
+  ngOnInit(): void {
+    
     this.loading = true;
+    
+    this.existeInvovador = true;
 
     this.activateRouter.params.subscribe((parametros) => {
       this.idInvocador = parametros["idInvocador"];
     });
 
-    this._riotService.getInvocadorById(this.idInvocador).subscribe((resp) => {
-      console.log(resp);
-      if(!resp){
-        this.isInvocador = false;
-      }
-      this.invocador = resp;
-      this.isInvocador = true;
-    });
+    if(this.idInvocador === "noexiste"){
+      this.existeInvovador = false;
+      this.loading = false;
+      return;
+    }
 
-    console.log("Cuando no encuentra al invocador " + this.invocador);
+
+    this._riotService.getInvocadorById(this.idInvocador).subscribe((resp) => {
+      this.invocador = resp;
+    });
 
     this._riotService.getCampeones().subscribe((resp) => {
       this.campeones = resp;
@@ -64,9 +70,7 @@ export class InvocadorComponent implements OnInit {
 
       this.loading = false;
     });
-  }
 
-  ngOnInit(): void {
   }
 
 }

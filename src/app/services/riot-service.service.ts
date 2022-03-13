@@ -16,7 +16,7 @@ import { PartidaResponse } from '../interfaces/Partida';
 export class RiotServiceService {
 
   private baseUrl: string = "api.riotgames.com/lol"
-  private api_key:string = "RGAPI-117d163c-e704-4c30-a15a-42566c394656";
+  private api_key:string = "RGAPI-e1b8b834-ea04-4630-af93-d36c185d74ac";
 
   private partidas: any[];
 
@@ -43,13 +43,13 @@ export class RiotServiceService {
   }
 
   public getInvocadorById(idInvocador: string){
-    return this.http.get<SummonerResponse>(`https://la1.${this.baseUrl}/summoner/v4/summoners/${idInvocador}?api_key=${this.api_key}`).pipe(
-      catchError((err) => of(null))
-    );
+    return this.http.get<SummonerResponse>(`https://la1.${this.baseUrl}/summoner/v4/summoners/${idInvocador}?api_key=${this.api_key}`);
   }
 
   public getInvocadorByNombre(nombreInvocador: string){
-    return this.http.get<SummonerResponse>(`https://la1.${this.baseUrl}/summoner/v4/summoners/by-name/${nombreInvocador}?api_key=${this.api_key}`);
+    return this.http.get<SummonerResponse>(`https://la1.${this.baseUrl}/summoner/v4/summoners/by-name/${nombreInvocador}?api_key=${this.api_key}`).pipe(
+      catchError((err) => of(null))
+    );
   }
 
   public getMaestriasCampeones(idInvocador: string){

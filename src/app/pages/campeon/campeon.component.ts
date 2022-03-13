@@ -18,7 +18,9 @@ export class CampeonComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private _ritoService: RiotServiceService
   ) {
+  }
 
+  ngOnInit(): void {
     this.loading = true;
     
     this.activateRoute.params.subscribe((parametros) => {
@@ -31,6 +33,4 @@ export class CampeonComponent implements OnInit {
       this.loading = false;
     });
   }
-
-  ngOnInit(): void {}
 }

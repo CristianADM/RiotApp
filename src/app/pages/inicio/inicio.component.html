@@ -1,7 +1,7 @@
 <app-loading *ngIf="loading"></app-loading>
 
 <div class="row row-cols-1 row-cols-md-4 g-4 mt-5" *ngIf="!loading">
-    <div class="col" *ngFor="let campeon of campeones | paginate: { itemsPerPage: 12, currentPage: page, totalItems: campeones.length }">
+    <div class="col" *ngFor="let campeon of campeones | paginate: { itemsPerPage: 12, currentPage: page, totalItems: campeones.length}">
         <div class="card">
             <img src="../../../assets/img/tiles/{{campeon.id}}_0.jpg" class="card-img-top" alt="{{campeon.name}}">
             <div class="card-body">

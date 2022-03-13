@@ -1,6 +1,6 @@
 <app-loading *ngIf="loading"></app-loading>
 
-<div class="row justify-content-center mt-3" *ngIf="!loading && isInvocador">
+<div class="row justify-content-center mt-3" *ngIf="!loading && existeInvovador">
     <div class="col-2 align-self-center">
         <img class="icon" src="../../../assets/img/profileicon/{{invocador.profileIconId}}.png" alt="">
     </div>
@@ -10,7 +10,7 @@
 </div>
 
 
-<div class="row justify-content-center mt-3" *ngIf="!loading && isInvocador">
+<div class="row justify-content-center mt-3" *ngIf="!loading && existeInvovador">
     <div class="col align-self-center mt-3" *ngFor="let maestria of maestriaCampeones; let i = index">
         <div class="card" style="width: 18rem;">
             <div><img src="../../../assets/img/tiles/{{campeones[i].id}}_1.jpg" class="card-img-top" alt="{{campeones[i].name}}">
@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<div class="mt-5" *ngIf="!loading && isInvocador">
+<div class="mt-5" *ngIf="!loading && existeInvovador">
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let partida of partidas">
             <div class="row">
@@ -65,4 +65,7 @@
             </div>
         </li>
     </ul>
+</div>
+<div class="mt-5" *ngIf="!existeInvovador">
+    <h1>El nombre de invocador no existe</h1>
 </div>

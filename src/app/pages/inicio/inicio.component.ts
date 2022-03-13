@@ -16,7 +16,9 @@ export class InicioComponent implements OnInit {
 
   constructor(private _ritoService: RiotServiceService, 
               private router: Router) {
+  }
 
+  ngOnInit(): void {
     this.loading = true;
 
     this._ritoService.getCampeones().subscribe((data)=>{
@@ -25,9 +27,6 @@ export class InicioComponent implements OnInit {
     });
 
     this.loading = false;
-  }
-
-  ngOnInit(): void {
   }
 
   verCampeon(idCampeon: string){
